@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="with=device-with,initial-scale=1.0" >
+  <meta http-equiv="x-ua-compatible">
+  <title>添加</title>
+  <style>
+      body{
+        background-image: url("https://img0.baidu.com/it/u=1117510688,1253605144&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500") ;
+        background-repeat: no-repeat;
+        background-size: 100% 200%;
+        display: flex;
+      }
+      #add{
+        width: 100%;
+        text-align: center;
+        margin-top: 10%;
+      }
+      .phone{
+        margin-top: 20px;
+      }
+      .button{
+        margin-top: 20px;
+        text-align: center;
+      }
+      .btn01{
+        margin-right: 10px;
+      }
+      .btn02{
+        margin-left: 10px;
+      }
+
+      h2{
+        color: darkseagreen;
+      }
+      span{
+        color: fuchsia;
+      }
+      .btn{
+        background-color: darkseagreen;
+        color: red;
+      }
+  </style>
+</head>
+<body>
+     <div id="add">
+       <h2>通讯录---添加</h2>
+       <form method="post" action="http://localhost:8080/main">
+         <div class="name">
+           <span>姓名</span>
+           <input type="text" id="username" name="username">
+         </div>
+         <div class="phone">
+           <span>电话</span>
+           <input type="text" id="userphone" name="userphone">
+         </div>
+         <div class="button">
+           <span class="btn01">
+           <a href="http://localhost:8080/"><input type="button" value="取消" class="btn" ></a>
+           </span>
+           <span class="btn02">
+             <input type="submit"  value="添加" class="btn" >
+           </span>
+         </div>
+       </form>
+     </div>
+
+     <script>
+     </script>
+</body>
+</html>

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no" >
+    <meta http-equiv="x-ua-compatible">
+    <title>Title</title>
+    <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+    <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+
+  <style>
+
+
+    body{
+      background-image: url("https://img0.baidu.com/it/u=1117510688,1253605144&fm=253&fmt=auto&app=138&f=JPEG?w=667&h=500") ;
+      background-repeat: no-repeat;
+      background-size: 100% 200%;
+      display: flex;
+    }
+    #mydata{
+      width: 100%;
+      text-align: center;
+    }
+    h2{
+      color: chocolate;
+    }
+
+    table{
+      text-align: center;
+      margin-top: 30px;
+      margin-left: 23%;
+    }
+
+    td{
+      border: 1px;
+      border-block: cornflowerblue;
+      margin: 0 auto;
+    }
+    div{
+      border: 1px blueviolet;
+    }
+    .content{
+      margin-left: 10%;
+    }
+  </style>
+
+</head>
+<body>
+           <div id="mydata" v-cloak v-if="isBool" >
+             <form action="http://localhost:8080/alter" method="post">
+               <h2>王义兰的通讯录</h2>
+               <table id="table">
+                 <div style="margin: 0 auto" class="content">
+                   <td id="text" ref="text">
+                     <input type="text"  v-model="text">
+                   </td>
+                   <td id="search">
+                     <input type="button" @click="searchUser" value="查询">
+                   </td>
+                   <td>
+                     <a href="http://localhost:8080/add"><input type="button" value="添加" ></a>
+                   </td>
+                 </div>
+
+                 <div class="content">
+                   <tr>
+                     <td id="name" width="20%" style="text-align: center">姓名</td>
+                     <td id="phone" width="20%" style="text-align: center">电话号码</td>
+                     <td id="op" width="30%" style="text-align: center;margin: 0 auto">操作</td>
+                   </tr>
+                 </div>
+                 <div>
+                   <tr v-for="user in users"  style="text-align: center">
+                     <td  width="20%" style="text-align: center">
+                       <input style="text-align: center" type="text" disabled :value="user.username" name="username">
+                     </td>
+                     <td  width="20%" style="text-align: center">
+                       <input style="text-align: center" type="text" disabled :value="user.userphone" name="userphone" >
+                     </td>
+                     <td  v-text="msgdelete" width="15%" style="text-align: center;color: crimson" @click="deleteUser(user)"></td>
+                     <td  width="15%" style="text-align: center"> <input @click="alter(user)"  type="submit" value="修改"></td>
+                   </tr>
+                 </div>
+               </table>
+             </form>
+           </div>
+
+           <script type="text/javascript">
+             var app = new Vue({
+               el: "#mydata",
+               data(){
+                 return {
+                   users: [{
+                     username: "",
+                     userphone: "",
+                   }],
+                   msg:"123",
+                   isBool : false,
+                   msgdelete:"删除",
+                   msgalter:"修改",
+                   text: "",
+                   ids : []
+                 }
+               },
+               devServer:{
+                 host:"0.0.0.0", port: 8080, open:true,proxy:{}
+               },
+               mounted(){
+                 axios.get("http://localhost:8080/obtainUsers").then(res =>{
+                   this.isBool = true
+                   console.log(res.data);
+                   this.users = res.data;
+                   console.log(this.users[0].username)
+                 }).catch( err => ( alert("err")))
+               },
+               methods:{
+                  searchUser : function (){
+                    if (this.text == "" || this.text ==null){
+                        alert("请重新输入!")
+                    }else {
+                      axios.post("http://localhost:8080/search",this.text).then( res =>{
+                        this.users = res.data;
+                      }).catch( err => (alert("err")))
+                    }
+                  },
+                  deleteUser : function (user){
+                    axios.post("http://localhost:8080/delete",user).then( res =>{
+                      this.users = res.data;
+                    }).catch( err => (alert("err")))
+                  },
+                 alter : function (user){
+                   axios.post("http://localhost:8080/postmsg",user).then( res =>{
+                   }).catch( err => (alert("err")))
+                 }
+               }
+             })
+           </script>
+</body>
+</html>

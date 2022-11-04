@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="with=device-with,initial-scale=1.0" >
+  <meta http-equiv="x-ua-compatible">
+  <title>Title</title>
+
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script src="https://unpkg.com/vue-router/dist/vue-router.js"></script>
+</head>
+<body>
+
+<div id="mydata">
+
+  <h1 v-text="msg"></h1>
+
+</div>
+
+<script type="text/javascript">
+     new Vue({
+       el:"#mydata",
+       data:{
+         msg:"123"
+       }
+     })
+</script>
+</body>
+</html>

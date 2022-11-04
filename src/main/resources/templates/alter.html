@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <script src="https://cdn.staticfile.org/vue/2.4.2/vue.min.js"></script>
+  <script src="https://cdn.staticfile.org/axios/0.18.0/axios.min.js"></script>
+</head>
+
+<style>
+  .div01{
+    margin-top: 10%;
+    text-align: center;
+    margin: 0 auto;
+  }
+  form{
+    margin-top: 200px;
+    margin: 0 auto;
+    width: 500px;
+    height: 500px;
+  }
+</style>
+<body>
+      <div id="alter" v-cloak  class="div01">
+         <H1>修改</H1>
+        <form action="http://localhost:8080/getAlter" method="post">
+          <div class="">
+            <span>姓名</span>
+            <input type="text" v-model="username" name="username">
+          </div>
+          <div class="">
+            <span>号码</span>
+            <input type="text" v-model="userphone" name="userphone">
+          </div>
+
+          <div style="text-align: center" class="">
+            <a href="http://localhost:8080"><input type="button" value="取消"></a>
+            <input type="submit" value="确认">
+          </div>
+        </form>
+      </div>
+      <script>
+
+        var app = new Vue({
+          el:"#alter",
+          data(){
+            return {
+              username: "",
+              userphone: ""
+            }
+          },
+          methods:{
+            alter : function(){
+
+            }
+          }
+        })
+      </script>
+</body>
+</html>
